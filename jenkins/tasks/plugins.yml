@@ -9,7 +9,7 @@
 
 - name: Set Jenkins admin password fact.
   set_fact:
-    jenkins_admin_password: "{{ adminpasswordfile['stdout'] | default(jenkins_admin_password) }}"
+    jenkins_admin_password: "{{ adminpasswordfile.stdout | default(jenkins_admin_password) }}"
   no_log: True
 
 - name: Get Jenkins admin token from file.
@@ -21,7 +21,7 @@
 
 - name: Set Jenkins admin token fact.
   set_fact:
-    jenkins_admin_token: "{{ admintokenfile['stdout'] | default(jenkins_admin_token) }}"
+    jenkins_admin_token: "{{ admintokenfile.stdout | default(jenkins_admin_token) }}"
   no_log: True
 
 # Update Jenkins so that plugin updates don't fail.
