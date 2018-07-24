@@ -1,0 +1,55 @@
+---
+# tasks file for Services
+- name: Ensuring that chargen, daytime, echo, time are not active.
+  service:
+     name: "{{ item }}"
+     state: stopped
+  with_items:
+    - chargen
+    - daytime
+    - echo
+    - time   
+
+- name: Ensuring that rsh, talk, telnet-server, tftp, rsync are not enabled.
+  service:
+     name: "{{ item }}"
+     enabled: no
+  with_items:
+    - rsh
+    - talk
+    - telnet
+    - tftp 
+    - rsync
+
+- name: Ensuring ntp and chrony is installed.
+  yum:
+     name: "{{ item }}"
+     state: latest
+  with_items:
+    - ntp
+    - chrony
+
+- name: Ensuring X Windows is not installed on machine.
+  yum: 
+     name: 
+     state: absent
+
+- name: Ensuring that Avahi is not installed.
+  yum:
+     name: avahi
+     state: absent
+
+- name: Ensuring that DHCP, LDAP, DNS, FTP, HTTP, POP3, IMAP, Samba, NFS server are not enabled
+  service: 
+     name: "{{ item }}"
+     enabled: no
+  with_items:
+    - dhcp
+    - sladp
+    - bind9
+    - vsftpd
+    - apache2
+    - dovecot
+    - smdb
+    - nfs-server
+...
